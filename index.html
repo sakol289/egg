@@ -138,6 +138,7 @@
         </div>
         <div id="timer" class="timer">00:00</div>
         <button id="startButton" class="btn btn-primary btn-lg btn-start">Start Cooking!</button>
+        <button id="stopButton" class="btn btn-danger btn-lg btn-start" style="display: none;">Stop Cooking</button>
         <p id="message" style="display: none;">Your eggs are ready! 🎉</p>
         <audio id="alarmSound" src="test.mp3" preload="auto"></audio>
     </div>
@@ -150,6 +151,7 @@
     <script>
         const timerElement = document.getElementById('timer');
         const startButton = document.getElementById('startButton');
+        const stopButton = document.getElementById('stopButton');
         const eggType = document.getElementById('eggType');
         const message = document.getElementById('message');
         const alarmSound = document.getElementById('alarmSound');
@@ -159,7 +161,10 @@
         function startTimer(durationInSeconds) {
             let remainingTime = durationInSeconds;
             
-            // Add cooking animation class
+            // แสดงปุ่มหยุด
+            stopButton.style.display = 'inline-block';
+
+            // เพิ่ม animation
             eggSvg.classList.add('cooking');
             
             function updateTimerDisplay() {
@@ -181,14 +186,25 @@
                     alarmSound.play().catch((error) => {
                         console.error('Error playing sound:', error);
                     });
+                    stopButton.style.display = 'none';  // ซ่อนปุ่มหยุดหลังจากเสร็จ
                 }
             }, 1000);
         }
 
+        // เมื่อคลิกปุ่มหยุด
+        stopButton.addEventListener('click', () => {
+            clearInterval(countdownInterval);  // หยุดการนับเวลา
+            stopButton.style.display = 'none';  // ซ่อนปุ่มหยุด
+            message.style.display = 'none';  // ซ่อนข้อความ
+            eggSvg.classList.remove('cooking');  // ลบ animation
+            timerElement.textContent = '00:00';  // รีเซ็ตเวลา
+        });
+
+        // เมื่อคลิกปุ่มเริ่ม
         startButton.addEventListener('click', () => {
-            clearInterval(countdownInterval);
-            message.style.display = 'none';
-            startTimer(parseInt(eggType.value, 10));
+            clearInterval(countdownInterval);  // หยุดการนับเวลาเดิม
+            message.style.display = 'none';  // ซ่อนข้อความ
+            startTimer(parseInt(eggType.value, 10));  // เริ่มนับใหม่
         });
     </script>
 </body>

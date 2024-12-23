@@ -9,9 +9,9 @@
         body {
             background: linear-gradient(135deg, #fdf8e7, #fff5d7);
             display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         .timer-card {
@@ -22,6 +22,7 @@
             text-align: center;
             max-width: 400px;
             width: 90%;
+            margin: auto;
         }
         .timer {
             font-size: 4rem;
@@ -83,10 +84,41 @@
             font-size: 1.2rem;
             margin-top: 1rem;
         }
+        footer {
+            background-color: #f9f9f9;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+            border-top: 1px solid #e0e0e0;
+        }
     </style>
 </head>
 <body>
-    <div class="timer-card">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Cute Egg Timer</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://new-like.com/">เว็บปั้มไลค์</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://store.cyber-safe.pro/">ขายแอปพรีเมี่ยม</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://cyber-safe.pro/">ผู้พัฒนา</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Timer Card -->
+    <div class="timer-card mt-4">
         <h1>Cute Egg Timer</h1>
         <p class="lead">Perfect eggs every time! 🍳</p>
         
@@ -131,6 +163,12 @@
         <p id="message" style="display: none;">Your eggs are ready! 🎉</p>
         <audio id="alarmSound" src="test.mp3" preload="auto"></audio>
     </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Cute Egg Timer. Made with ❤️ by <a href="https://cyber-safe.pro/">Cyber Safe</a>.</p>
+    </footer>
+
     <script>
         const timerElement = document.getElementById('timer');
         const startButton = document.getElementById('startButton');
